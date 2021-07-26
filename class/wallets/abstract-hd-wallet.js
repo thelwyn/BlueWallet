@@ -259,7 +259,7 @@ export class AbstractHDWallet extends LegacyWallet {
   /**
    * @returns {string} Root derivation path for wallet if any
    */
-  getDerivationPath(): string {
+  getDerivationPath() {
     return this._derivationPath;
   }
 
@@ -268,7 +268,7 @@ export class AbstractHDWallet extends LegacyWallet {
    *
    * @param {String} path - path
    */
-  setDerivationPath(path: string): void {
+  setDerivationPath(path) {
     this._derivationPath = path;
   }
 }

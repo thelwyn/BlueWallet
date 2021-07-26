@@ -10,7 +10,7 @@ type WalletStatics = {
   derivationPath?: string;
 };
 
-type WalletWithPassphrase = AbstractWallet & { getPassphrase: () => string };
+type WalletWithPassphrase = AbstractWallet & { getPassphrase: () => string; getDerivationPath: () => string };
 type UtxoMetadata = {
   frozen?: boolean;
   memo?: string;
