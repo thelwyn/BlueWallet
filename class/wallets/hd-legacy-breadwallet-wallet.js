@@ -187,17 +187,17 @@ export class HDLegacyBreadwalletWallet extends HDLegacyP2PKHWallet {
     return lastUsedIndex;
   }
 
-  _getDerivationPathByAddress(address, BIP = 0) {
-    const path = `m/${BIP}'`;
-    for (let c = 0; c < this.next_free_address_index + this.gap_limit; c++) {
-      if (this._getExternalAddressByIndex(c) === address) return path + '/0/' + c;
-    }
-    for (let c = 0; c < this.next_free_change_address_index + this.gap_limit; c++) {
-      if (this._getInternalAddressByIndex(c) === address) return path + '/1/' + c;
-    }
-
-    return false;
-  }
+//   _getDerivationPathByAddress(address, BIP = 0) {
+//     const path = `m/${BIP}'`;
+//     for (let c = 0; c < this.next_free_address_index + this.gap_limit; c++) {
+//       if (this._getExternalAddressByIndex(c) === address) return path + '/0/' + c;
+//     }
+//     for (let c = 0; c < this.next_free_change_address_index + this.gap_limit; c++) {
+//       if (this._getInternalAddressByIndex(c) === address) return path + '/1/' + c;
+//     }
+//
+//     return false;
+//   }
 
   _addPsbtInput(psbt, input, sequence, masterFingerprintBuffer) {
     // hack to use

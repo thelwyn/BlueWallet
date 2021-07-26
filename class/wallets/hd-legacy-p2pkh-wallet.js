@@ -40,7 +40,7 @@ export class HDLegacyP2PKHWallet extends AbstractHDElectrumWallet {
     const seed = this._getSeed();
     const root = bitcoin.bip32.fromSeed(seed);
 
-    const path = "m/44'/0'/0'";
+    const path = this.getDerivationPath();
     const child = root.derivePath(path).neutered();
     this._xpub = child.toBase58();
 
@@ -67,7 +67,7 @@ export class HDLegacyP2PKHWallet extends AbstractHDElectrumWallet {
     const seed = this._getSeed();
 
     const root = HDNode.fromSeed(seed);
-    const path = `m/44'/0'/0'/${internal ? 1 : 0}/${index}`;
+    const path = `${this.getDerivationPath()}/${internal ? 1 : 0}/${index}`;
     const child = root.derivePath(path);
 
     return child.toWIF();
@@ -162,9 +162,9 @@ export class HDLegacyP2PKHWallet extends AbstractHDElectrumWallet {
 
     return psbt;
   }
-
-  _getDerivationPathByAddress(address, BIP = 44) {
-    // only changing defaults for function arguments
-    return super._getDerivationPathByAddress(address, BIP);
-  }
+//
+//   _getDerivationPathByAddress(address, BIP = 44) {
+//     // only changing defaults for function arguments
+//     return super._getDerivationPathByAddress(address, BIP);
+//   }
 }

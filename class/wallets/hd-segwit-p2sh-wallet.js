@@ -49,7 +49,7 @@ export class HDSegwitP2SHWallet extends AbstractHDElectrumWallet {
     if (!this.secret) return false;
     const seed = this._getSeed();
     const root = bitcoin.bip32.fromSeed(seed);
-    const path = `m/49'/0'/0'/${internal ? 1 : 0}/${index}`;
+    const path = `${this.getDerivationPath()}/${internal ? 1 : 0}/${index}`;
     const child = root.derivePath(path);
 
     return bitcoin.ECPair.fromPrivateKey(child.privateKey).toWIF();
@@ -97,7 +97,7 @@ export class HDSegwitP2SHWallet extends AbstractHDElectrumWallet {
     const seed = this._getSeed();
     const root = HDNode.fromSeed(seed);
 
-    const path = "m/49'/0'/0'";
+    const path = this.getDerivationPath();
     const child = root.derivePath(path).neutered();
     const xpub = child.toBase58();
 
@@ -112,7 +112,7 @@ export class HDSegwitP2SHWallet extends AbstractHDElectrumWallet {
 
   _addPsbtInput(psbt, input, sequence, masterFingerprintBuffer) {
     const pubkey = this._getPubkeyByAddress(input.address);
-    const path = this._getDerivationPathByAddress(input.address, 49);
+    const path = this._getDerivationPathByAddress(input.address);
     const p2wpkh = bitcoin.payments.p2wpkh({ pubkey });
     const p2sh = bitcoin.payments.p2sh({ redeem: p2wpkh });
 
@@ -149,8 +149,8 @@ export class HDSegwitP2SHWallet extends AbstractHDElectrumWallet {
     return address;
   }
 
-  _getDerivationPathByAddress(address, BIP = 49) {
-    // only changing defaults for function arguments
-    return super._getDerivationPathByAddress(address, BIP);
-  }
+  // _getDerivationPathByAddress(address, BIP = 49) {
+  //   // only changing defaults for function arguments
+  //   return super._getDerivationPathByAddress(address, BIP);
+  // }
 }
